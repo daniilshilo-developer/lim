@@ -9,7 +9,8 @@ require('tweaks')
 
 -- Конфигурация цветовой схемы
 vim.opt.syntax = 'enable'
-vim.cmd[[colorscheme nordfox]]
+vim.cmd[[colorscheme gruvbox8]]
+vim.cmd[[let g:t_Co=16]]
 
 -- Кодировка
 vim.opt.encoding = 'utf-8'

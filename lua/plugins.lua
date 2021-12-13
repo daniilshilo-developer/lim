@@ -8,7 +8,7 @@ return require('packer').startup(function()
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   -- Цветовая схема
-  use 'EdenEast/nightfox.nvim'
+  use 'lifepillar/vim-gruvbox8'
 
   -- Статус-бар
   use {
