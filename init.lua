@@ -66,7 +66,7 @@ vim.opt.backup = false
 vim.opt.swapfile = false
 
 -- Используется системный буфер обмена
-vim.cmd[[set clipboard^=unnamedplus]]
+vim.opt.clipboard = 'unnamedplus'
 
 -- Не добавляем новую линию в конце
 vim.opt.fixendofline = false
