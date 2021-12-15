@@ -10,8 +10,7 @@ require('tweaks')
 -- Конфигурация цветовой схемы
 vim.opt.syntax = 'enable'
 vim.opt.background = 'dark'
-vim.cmd[[colorscheme gruvbox-material]]
-vim.cmd[[let g:t_Co=16]]
+vim.cmd('colorscheme tokyonight')
 
 -- Кодировка
 vim.opt.encoding = 'utf-8'
@@ -30,7 +29,7 @@ vim.opt.cursorline = true
 vim.opt.backspace = 'indent,eol,start'
 
 -- Переключение между буфферами без сохранения
-vim.opt.hidden = true
+vim.o.hidden = true
 
 -- Вложенность
 vim.opt.foldmethod = 'syntax'

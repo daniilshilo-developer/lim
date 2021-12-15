@@ -32,31 +32,45 @@ map('n', '<leader>tw', '<cmd>tabclose<cr>', {})
 -- Очистить поиск
 map('n', '<C-l>', '<cmd>nohl<cr>', {noremap = true})
 
--- Lightspeed
-map('n', '<leader>j', '<plug>Lightspeed_s', {noremap = true})
-map('n', '<leader>k', '<plug>Lightspeed_S', {noremap = true})
-
 -- LSP {{{
--- Перейти к определению
-map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+	-- Перейти к определению
+	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
 
--- Перейти к референсам
-map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+	-- Перейти к референсам
+	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
 
--- Автодополнение
-vim.cmd[[
-inoremap <expr> <silent> <Tab>   pumvisible() ? "\<C-Space>" : "\<Tab>"
-inoremap <expr> <silent> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-]]
--- }}}
+	-- Переименовать объект
+	map('n', '<F2>', '<cmd><cr>', {noremap = true, silent = true})
 
--- LSP Saga (плагин для красивого отображения LSP) {{{
--- Показать определение
-map('n', 'gD', '<cmd>Lspsaga preview_definition<cr>', { noremap = true, silent = true })
+	-- }}}
 
--- Переименовать объект
-map('n', '<F2>', '<cmd>Lspsaga rename<cr>', {noremap = true, silent = true})
-
--- Терминал
-map('n', '<leader>c', '<cmd>Lspsaga open_floaterm<cr>', {noremap = true, silent = true})
--- }}}
+	-- Barbar {{{
+		-- Move to previous/next
+		vim.cmd[[
+		nnoremap <silent>    <A-,> :BufferPrevious<CR>
+		nnoremap <silent>    <A-.> :BufferNext<CR>
+		]]
+		-- Re-order to previous/next
+		vim.cmd[[
+		nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
+		nnoremap <silent>    <A->> :BufferMoveNext<CR>
+		]]
+		-- Goto buffer in position...
+		vim.cmd[[
+		nnoremap <silent>    <A-1> :BufferGoto 1<CR>
+		nnoremap <silent>    <A-2> :BufferGoto 2<CR>
+		nnoremap <silent>    <A-3> :BufferGoto 3<CR>
+		nnoremap <silent>    <A-4> :BufferGoto 4<CR>
+		nnoremap <silent>    <A-5> :BufferGoto 5<CR>
+		nnoremap <silent>    <A-6> :BufferGoto 6<CR>
+		nnoremap <silent>    <A-7> :BufferGoto 7<CR>
+		nnoremap <silent>    <A-8> :BufferGoto 8<CR>
+		nnoremap <silent>    <A-9> :BufferLast<CR>
+		]]
+		-- Close buffer
+		vim.cmd[[nnoremap <silent>    <A-c> :BufferClose<CR>
+		]]
+		-- Magic buffer-picking mode
+		vim.cmd[[nnoremap <silent> <A-s>    :BufferPick<CR>
+		]]
+	-- }}}
