@@ -1,49 +1,72 @@
 -- Импортируем packer.nvim
-return require('packer').startup(function()
+return require('packer').startup({function()
 
-  -- Packer будет обновлять сам себя
-  use 'wbthomason/packer.nvim'
+	-- Packer будет обновлять сам себя
+	use 'wbthomason/packer.nvim'
 
-  -- Подсветка синтаксиса
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	-- Универсальное меню для поиска
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = {{ 'nvim-lua/plenary.nvim' }}
+	}
 
-  -- Цветовая схема
-  use 'lifepillar/vim-gruvbox8'
+	-- Плавный скролл
+	use {
+		'karb94/neoscroll.nvim',
+		config = {{ require('config/neoscroll') }}
+	}
 
-  -- Статус-бар
-  use {
-	  'nvim-lualine/lualine.nvim',
-	  requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  }
+	-- Подсветка синтаксиса
+	use {
+		'nvim-treesitter/nvim-treesitter',
+	run = ':TSUpdate',
+	config = {{ require('config/treesitter') }}
+}
 
-  -- LSP
-  use 'neovim/nvim-lspconfig'
-  use 'nvim-lua/completion-nvim'
-  use 'anott03/nvim-lspinstall'
+	-- Цветовая схема
+	use 'sainnhe/gruvbox-material'
+
+	-- Автодополнение
+	use {
+		'windwp/nvim-autopairs',
+		config = {{ require('config/autopairs') }}
+	}
+
+	-- Иконки для меню автодополнения
+	use { 
+		'onsails/lspkind-nvim',
+		config = {{ require('config/lspkind') }}
+	}
 
 	-- LSP
-	local lspconfig = require'lspconfig'
-	local completion = require'completion'
-	local function custom_on_attach(client)
-		print('Attaching to ' .. client.name)
-		completion.on_attach(client)
-	end
+	use {
+		'neovim/nvim-lspconfig',
+		config = {{ require('config/lspconfig') }},
 
-	local default_config = {
-		on_attach = custom_on_attach,
+		-- Плагин для удобного просмотра и для установки LSP
+		requires = {{ 'glepnir/lspsaga.nvim' }}
 	}
 
-	-- LSP Handlers
-	vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, {
-		underline = true,
-		virtual_text = false,
-		signs = true,
-		update_in_insert = true,
-	}
-	)
+	use {
+		'williamboman/nvim-lsp-installer',
 
-	-- setup language servers here
-	lspconfig.tsserver.setup(default_config)
-end)
+		-- Конфигурация для того, чтобы устанавливать сервера
+		config = {{ require('config/nvim-lsp-installer') }}
+	}
+
+
+	-- Плагин для автодополнения
+	use {
+		'hrsh7th/nvim-cmp',
+		requires = {{ "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" }},
+		config = {{ require('config/complete') }}
+	}
+
+	-- Статус-бар
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = {'kyazdani42/nvim-web-devicons', opt = true},
+		config = {{ require('config/lualine') }}
+	}
+end})
 

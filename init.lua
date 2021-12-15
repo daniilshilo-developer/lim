@@ -9,7 +9,8 @@ require('tweaks')
 
 -- Конфигурация цветовой схемы
 vim.opt.syntax = 'enable'
-vim.cmd[[colorscheme gruvbox8]]
+vim.opt.background = 'dark'
+vim.cmd[[colorscheme gruvbox-material]]
 vim.cmd[[let g:t_Co=16]]
 
 -- Кодировка
@@ -70,3 +71,8 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Не добавляем новую линию в конце
 vim.opt.fixendofline = false
+
+-- Говорим Neovim, чтобы он нам помогал завершать фразы (автодополнение)
+vim.opt.completeopt = { 'menuone', 'noinsert' }
+
+
