@@ -10,6 +10,17 @@ return require('packer').startup({function()
 		requires = {{ 'nvim-lua/plenary.nvim' }}
 	}
 
+	-- Интеграция Git
+	use {
+		'lewis6991/gitsigns.nvim',
+		requires = {
+			'nvim-lua/plenary.nvim'
+		},
+		config = function()
+			require('gitsigns').setup()
+		end
+	}
+
 	-- Плавный скролл
 	use {
 		'karb94/neoscroll.nvim',
@@ -19,9 +30,9 @@ return require('packer').startup({function()
 	-- Подсветка синтаксиса
 	use {
 		'nvim-treesitter/nvim-treesitter',
-	run = ':TSUpdate',
-	config = {{ require('config/treesitter') }}
-}
+		run = ':TSUpdate',
+		config = {{ require('config/treesitter') }}
+	}
 
 	-- Цветовая схема
 	use 'sainnhe/gruvbox-material'
@@ -47,6 +58,7 @@ return require('packer').startup({function()
 		requires = {{ 'glepnir/lspsaga.nvim' }}
 	}
 
+	-- Плагин для установки LS
 	use {
 		'williamboman/nvim-lsp-installer',
 
@@ -54,6 +66,11 @@ return require('packer').startup({function()
 		config = {{ require('config/nvim-lsp-installer') }}
 	}
 
+	-- Плагин для сниппетов
+	use {
+		'L3MON4D3/LuaSnip',
+		config = {{ require('config/luasnip') }}
+	}
 
 	-- Плагин для автодополнения
 	use {
