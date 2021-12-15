@@ -52,11 +52,19 @@ return require('packer').startup({function()
 	-- LSP
 	use {
 		'neovim/nvim-lspconfig',
-		config = {{ require('config/lspconfig') }},
 
 		-- Плагин для удобного просмотра и для установки LSP
 		requires = {{ 'glepnir/lspsaga.nvim' }}
 	}
+
+	-- Плагин для автодополнения
+	use {
+		'ms-jpq/coq_nvim',
+		branch = 'coq',
+		config = require('config/coq')
+	}
+
+	use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
 	-- Плагин для установки LS
 	use {
@@ -70,13 +78,6 @@ return require('packer').startup({function()
 	use {
 		'L3MON4D3/LuaSnip',
 		config = {{ require('config/luasnip') }}
-	}
-
-	-- Плагин для автодополнения
-	use {
-		'hrsh7th/nvim-cmp',
-		requires = {{ "hrsh7th/cmp-nvim-lsp", "hrsh7th/cmp-buffer", "hrsh7th/cmp-path" }},
-		config = {{ require('config/complete') }}
 	}
 
 	-- Статус-бар

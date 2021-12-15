@@ -56,4 +56,7 @@ map('n', 'gD', '<cmd>Lspsaga preview_definition<cr>', { noremap = true, silent =
 
 -- Переименовать объект
 map('n', '<F2>', '<cmd>Lspsaga rename<cr>', {noremap = true, silent = true})
+
+-- Терминал
+map('n', '<leader>c', '<cmd>Lspsaga open_floaterm<cr>', {noremap = true, silent = true})
 -- }}}
