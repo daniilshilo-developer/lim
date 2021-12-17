@@ -11,16 +11,28 @@ return require('packer').startup({function()
 		config = {{ require('config/treesitter') }}
 	}
 
-	-- Универсальное меню для поиска
+	-- Файловый менеджер
 	use {
-		'nvim-telescope/telescope.nvim',
-		requires = {{ 'nvim-lua/plenary.nvim' }}
+		'ms-jpq/chadtree',
+		branch = 'chad',
+		run = ':CHADdeps',
 	}
+
+	-- Универсальное меню для поиска
+use {
+  'nvim-telescope/telescope.nvim',
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
 
 	-- Плавный скролл
 	use {
 		'karb94/neoscroll.nvim',
 		config = {{ require('config/neoscroll') }}
+	}
+
+	-- Структура файлов
+	use {
+		'liuchengxu/vista.vim'
 	}
 
 	-- Цветовая схема
@@ -37,6 +49,11 @@ return require('packer').startup({function()
 				vim.cmd[[colorscheme tokyonight]]
 			})
 		end
+	}
+
+	-- Дашбоард
+	use {
+		'mhinz/vim-startify',
 	}
 
 	-- Автодополнение скобок

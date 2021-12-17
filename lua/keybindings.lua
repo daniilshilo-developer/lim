@@ -25,6 +25,15 @@ map('n', '<leader>g', '<cmd>Telescope git_status<cr>', {})
 -- Ветки (Git)
 map('n', '<leader>b', '<cmd>Telescope git_branches<cr>', {})
 
+-- Определения (LSP)
+map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', {})
+
+-- Определения (LSP)
+map('n', 'gr', '<cmd>Telescope lsp_references<cr>', {})
+
+-- Открыть проводник
+map('n', '<leader>v', '<cmd>:CHADopen<cr>', {})
+
 -- Табы
 map('n', '<leader>tt', '<cmd>tabnew<cr>', {})
 map('n', '<leader>tw', '<cmd>tabclose<cr>', {})
@@ -33,14 +42,12 @@ map('n', '<leader>tw', '<cmd>tabclose<cr>', {})
 map('n', '<C-l>', '<cmd>nohl<cr>', {noremap = true})
 
 -- LSP {{{
-	-- Перейти к определению
-	map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
-
-	-- Перейти к референсам
-	map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
 
 	-- Переименовать объект
-	map('n', '<F2>', '<cmd><cr>', {noremap = true, silent = true})
+	map('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', {noremap = true, silent = true})
+
+	-- Документация
+	map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
 
 	-- }}}
 
@@ -74,3 +81,6 @@ map('n', '<C-l>', '<cmd>nohl<cr>', {noremap = true})
 		vim.cmd[[nnoremap <silent> <A-s>    :BufferPick<CR>
 		]]
 	-- }}}
+
+	-- Vista
+	map('n', '<leader>[', '<cmd>Vista nvim_lsp<cr>', {})
