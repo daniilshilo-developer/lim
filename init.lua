@@ -10,7 +10,7 @@ require('tweaks')
 -- Конфигурация цветовой схемы
 vim.opt.syntax = 'enable'
 vim.opt.background = 'dark'
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme gruvbox-material')
 
 -- Кодировка
 vim.opt.encoding = 'utf-8'

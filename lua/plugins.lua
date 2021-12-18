@@ -19,15 +19,21 @@ return require('packer').startup({function()
 	}
 
 	-- Универсальное меню для поиска
-use {
-  'nvim-telescope/telescope.nvim',
-  requires = { {'nvim-lua/plenary.nvim'} }
-}
+	use {
+		'nvim-telescope/telescope.nvim',
+		requires = { {'nvim-lua/plenary.nvim'} }
+	}
 
 	-- Плавный скролл
 	use {
 		'karb94/neoscroll.nvim',
 		config = {{ require('config/neoscroll') }}
+	}
+
+	-- Плагины
+	use {
+		'b3nj5m1n/kommentary',
+		config = {{ require('config/kommentary') }}
 	}
 
 	-- Структура файлов
@@ -36,24 +42,20 @@ use {
 	}
 
 	-- Цветовая схема
-	use {
-		'folke/tokyonight.nvim',
-
-		config = function()
-			require('tokyonight').setup({
-				tokyonight_style = 'storm',
-				tokyonight_italic_comments = true,
-				tokyonight_italic_keywords = true,
-				tokyonight_transparent = true,
-
-				vim.cmd[[colorscheme tokyonight]]
-			})
-		end
-	}
+	use 'sainnhe/gruvbox-material'
 
 	-- Дашбоард
 	use {
 		'mhinz/vim-startify',
+		setup = function()
+			vim.cmd[[
+			" Не меняем директорию при переходе
+			let g:startify_change_to_dir = 0
+
+			" Меняем директорию на директорию VCS (git)
+			let g:startify_change_to_vcs_root = 1
+			]]
+		end,
 	}
 
 	-- Автодополнение скобок

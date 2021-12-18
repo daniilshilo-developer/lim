@@ -35,8 +35,7 @@ map('n', 'gr', '<cmd>Telescope lsp_references<cr>', {})
 map('n', '<leader>v', '<cmd>:CHADopen<cr>', {})
 
 -- Табы
-map('n', '<leader>tt', '<cmd>tabnew<cr>', {})
-map('n', '<leader>tw', '<cmd>tabclose<cr>', {})
+map('n', '<leader>t', '<cmd>tabnew<cr>', {})
 
 -- Очистить поиск
 map('n', '<C-l>', '<cmd>nohl<cr>', {noremap = true})
