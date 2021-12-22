@@ -1,22 +1,42 @@
--- Импортируем packer.nvim
-return require('packer').startup({function()
+-- Перекачиваем плагины после сохранения конфигурации Packer'а
+vim.cmd[[
+augroup packer_user_config
+autocmd!
+autocmd BufWritePost plugins.lua source <afile> | PackerSync
+augroup end
+]]
+
+-- Добавляем пакет Packer'а
+vim.cmd[[packadd packer.nvim]]
+
+-- Инициализируем Packer
+return require('packer').startup(function(use)
+
+-- Packer собственно {{{
 
 	-- Packer будет обновлять сам себя
-	use 'wbthomason/packer.nvim'
-
-	-- Подсветка синтаксиса
 	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-		config = {{ require('config/treesitter') }}
+		'wbthomason/packer.nvim',
 	}
+
+-- }}}
+
+-- Файловый менеджер {{{
 
 	-- Файловый менеджер
 	use {
-		'ms-jpq/chadtree',
-		branch = 'chad',
-		run = ':CHADdeps',
+		'kyazdani42/nvim-tree.lua',
+		requires = {
+			'kyazdani42/nvim-web-devicons', -- optional, for file icon
+		},
+		config = function()
+			require'nvim-tree'.setup{}
+		end,
 	}
+
+-- }}}
+
+-- Поиск {{{
 
 	-- Универсальное меню для поиска
 	use {
@@ -24,47 +44,41 @@ return require('packer').startup({function()
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
-	-- Плавный скролл
-	use {
-		'karb94/neoscroll.nvim',
-		config = {{ require('config/neoscroll') }}
-	}
+-- }}}
 
-	-- Плагины
-	use {
-		'b3nj5m1n/kommentary',
-		config = {{ require('config/kommentary') }}
-	}
+-- Темы и синтаксис {{{
 
-	-- Структура файлов
+	-- Подсветка синтаксиса
 	use {
-		'liuchengxu/vista.vim'
+		'nvim-treesitter/nvim-treesitter',
+		--run = ':TSUpdate',
+		config = function()
+			require('config/treesitter')
+		end
 	}
 
 	-- Цветовая схема
 	use 'sainnhe/gruvbox-material'
+	use 'tanvirtin/monokai.nvim'
+	use 'navarasu/onedark.nvim'
 
-	-- Дашбоард
+-- }}}
+
+-- Комментарии {{{
+
+	-- Комментарии
 	use {
-		'mhinz/vim-startify',
-		setup = function()
-			vim.cmd[[
-			" Не меняем директорию при переходе
-			let g:startify_change_to_dir = 0
-
-			" Меняем директорию на директорию VCS (git)
-			let g:startify_change_to_vcs_root = 1
-			]]
-		end,
+		'b3nj5m1n/kommentary',
+		config = function()
+			require('config/kommentary')
+		end
 	}
 
-	-- Автодополнение скобок
-	use {
-		'windwp/nvim-autopairs',
-		config = {{ require('config/autopairs') }}
-	}
+-- }}}
 
-	-- LSP
+-- LSP {{{
+
+	-- Конфигурация для LSP
 	use {
 		'neovim/nvim-lspconfig',
 	}
@@ -73,7 +87,14 @@ return require('packer').startup({function()
 	use {
 		'ms-jpq/coq_nvim',
 		branch = 'coq',
-		config = require('config/coq')
+		config = function()
+			require('config/coq')
+		end,
+
+		-- Post-Install hook
+		run = function()
+			vim.cmd[[COQdeps]]
+		end
 	}
 	use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
@@ -82,19 +103,74 @@ return require('packer').startup({function()
 		'williamboman/nvim-lsp-installer',
 
 		-- Конфигурация для того, чтобы устанавливать сервера
-		config = {{ require('config/nvim-lsp-installer') }}
+		config = function()
+			require('config/nvim-lsp-installer')
+		end
 	}
+
+	-- Дерево методов
+	use {
+		'stevearc/aerial.nvim',
+		config = function()
+			require('config/aerial')
+		end
+	}
+
+	-- Улучшеная подсветка
+	use 'folke/lsp-colors.nvim'
+
+-- }}}
+
+-- Табы и статус {{{
 
 	-- Статус-бар
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = {'kyazdani42/nvim-web-devicons', opt = true},
-		config = {{ require('config/lualine') }}
+		config = function()
+			require('config/lualine') 
+		end
 	}
 
-	-- Таббар
-	use {
-		'romgrk/barbar.nvim',
-		requires = {'kyazdani42/nvim-web-devicons'}
+	-- Табы
+	use { 
+		'alvarosevilla95/luatab.nvim',
+		requires='kyazdani42/nvim-web-devicons',
+		config = function()
+
+			-- Запускаем таблайн
+			require('luatab').setup() 
+		end
 	}
-end})
+
+-- }}}
+
+-- Прочее {{{
+
+	-- Плавный скролл
+	use {
+		'karb94/neoscroll.nvim',
+		config = function()
+			require('config/neoscroll')
+		end
+	}
+
+	-- Автодополнение скобок
+	use {
+		'windwp/nvim-autopairs',
+		config = function()
+			require('config/autopairs')
+		end
+	}
+
+-- }}}
+
+-- Если мы только что установили Packer
+if packer_bootstrap then
+
+	-- Устанавливаем плагины
+	require('packer').sync()
+end
+end)
+
+-- vim:ts=2:foldmethod=marker:foldlevel=0:sw=0:sts=2:noet:noci
