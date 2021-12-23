@@ -32,7 +32,7 @@ map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', {})
 map('n', 'gr', '<cmd>Telescope lsp_references<cr>', {})
 
 -- Открыть проводник
-map('n', '<leader>v', '<cmd>:CHADopen<cr>', {})
+map('n', '<leader>v', '<cmd>:NvimTreeToggle<cr>', {})
 
 -- Табы
 map('n', '<leader>t', '<cmd>tabnew<cr>', {})
@@ -53,33 +53,25 @@ map('n', '<C-l>', '<cmd>nohl<cr>', {noremap = true})
 	-- Barbar {{{
 		-- Move to previous/next
 		vim.cmd[[
-		nnoremap <silent>    <A-,> :BufferPrevious<CR>
-		nnoremap <silent>    <A-.> :BufferNext<CR>
+		nnoremap <silent>    <A-,> :BufferLineCyclePrev<CR>
+		nnoremap <silent>    <A-.> :BufferLineCycleNext<CR>
 		]]
 		-- Re-order to previous/next
 		vim.cmd[[
-		nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
-		nnoremap <silent>    <A->> :BufferMoveNext<CR>
-		]]
-		-- Goto buffer in position...
-		vim.cmd[[
-		nnoremap <silent>    <A-1> :BufferGoto 1<CR>
-		nnoremap <silent>    <A-2> :BufferGoto 2<CR>
-		nnoremap <silent>    <A-3> :BufferGoto 3<CR>
-		nnoremap <silent>    <A-4> :BufferGoto 4<CR>
-		nnoremap <silent>    <A-5> :BufferGoto 5<CR>
-		nnoremap <silent>    <A-6> :BufferGoto 6<CR>
-		nnoremap <silent>    <A-7> :BufferGoto 7<CR>
-		nnoremap <silent>    <A-8> :BufferGoto 8<CR>
-		nnoremap <silent>    <A-9> :BufferLast<CR>
+		nnoremap <silent>    <A-<> :BufferLineMovePrev<CR>
+		nnoremap <silent>    <A->> :BufferLineMoveNext<CR>
 		]]
 		-- Close buffer
-		vim.cmd[[nnoremap <silent>    <A-c> :BufferClose<CR>
+		vim.cmd[[
+		nnoremap <silent>    <A-c> :bdelete<CR>
+		nnoremap <silent>    <A-i> :BufferLineCloseLeft<CR>
+		nnoremap <silent>    <A-o> :BufferLineCloseRight<CR>
 		]]
 		-- Magic buffer-picking mode
-		vim.cmd[[nnoremap <silent> <A-s>    :BufferPick<CR>
+		vim.cmd[[
+		nnoremap <silent> <A-s>    :BufferPick<CR>
 		]]
 	-- }}}
 
 	-- Vista
-	map('n', '<leader>[', '<cmd>Vista nvim_lsp<cr>', {})
+	map('n', '<leader>[', '<cmd>AerialToggle<cr>', {})

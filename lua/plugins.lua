@@ -108,6 +108,20 @@ return require('packer').startup(function(use)
 		end
 	}
 
+	-- Дополнение для LSP (диагностика, линт)
+	use {
+		'jose-elias-alvarez/null-ls.nvim',
+		config = function()
+			require("null-ls").setup({
+				sources = {
+					require("null-ls").builtins.formatting.stylua,
+					require("null-ls").builtins.diagnostics.eslint,
+					require("null-ls").builtins.completion.spell,
+				},
+			})
+		end
+	}
+
 	-- Дерево методов
 	use {
 		'stevearc/aerial.nvim',
@@ -133,14 +147,27 @@ return require('packer').startup(function(use)
 	}
 
 	-- Табы
-	use { 
-		'alvarosevilla95/luatab.nvim',
-		requires='kyazdani42/nvim-web-devicons',
+	use {
+		'akinsho/bufferline.nvim',
+		requires = 'kyazdani42/nvim-web-devicons',
 		config = function()
-
-			-- Запускаем таблайн
-			require('luatab').setup() 
+			require('bufferline').setup()
 		end
+	}
+
+-- }}}
+
+-- Git {{{
+
+	use {
+		'tanvirtin/vgit.nvim',
+		event = 'BufWinEnter',
+		requires = {
+			'nvim-lua/plenary.nvim',
+		},
+		config = function()
+			require('vgit').setup()
+		end,
 	}
 
 -- }}}
