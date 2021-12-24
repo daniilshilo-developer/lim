@@ -83,20 +83,23 @@ return require('packer').startup(function(use)
 		'neovim/nvim-lspconfig',
 	}
 
+	-- Сниппеты
+	use {
+		'hrsh7th/cmp-vsnip',
+		requires = {{'hrsh7th/vim-vsnip'}}
+	}
+
 	-- Плагин для автодополнения
 	use {
-		'ms-jpq/coq_nvim',
-		branch = 'coq',
+		'hrsh7th/nvim-cmp',
+		requires = {{
+			'hrsh7th/cmp-nvim-lsp',
+			'hrsh7th/cmp-path'
+		}},
 		config = function()
-			require('config/coq')
-		end,
-
-		-- Post-Install hook
-		run = function()
-			vim.cmd[[COQdeps]]
+			require('config/cmp')
 		end
 	}
-	use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
 
 	-- Плагин для установки LS
 	use {
