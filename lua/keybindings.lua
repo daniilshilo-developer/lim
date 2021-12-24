@@ -86,4 +86,11 @@ map('n', '<leader>[', '<cmd>AerialToggle<cr>', {})
 
 -- }}}
 
+-- Trouble  {{{
+
+-- Тоггл боттомбара с ошибками в коде
+map('n', '<C-t>', '<cmd>TroubleToggle<cr><C-w>k', {noremap = true})
+
+-- }}}
+
 -- vim:ts=2:foldmethod=marker:foldlevel=0:sw=0:sts=2:noet:noci

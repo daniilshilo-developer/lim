@@ -61,6 +61,10 @@ return require('packer').startup(function(use)
 	use 'sainnhe/gruvbox-material'
 	use 'tanvirtin/monokai.nvim'
 	use 'navarasu/onedark.nvim'
+	use {
+		'pineapplegiant/spaceduck',
+		branch = 'main' 
+	}
 
 -- }}}
 
@@ -134,6 +138,15 @@ return require('packer').startup(function(use)
 		'stevearc/aerial.nvim',
 		config = function()
 			require('config/aerial')
+		end
+	}
+
+	-- Диагностика
+	use {
+		"folke/trouble.nvim",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = function()
+			require("trouble").setup {}
 		end
 	}
 
