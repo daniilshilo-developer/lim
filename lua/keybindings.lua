@@ -65,26 +65,18 @@ map('n', '<leader>v', '<cmd>:NvimTreeToggle<cr>', {})
 -- Bufferline {{{
 
 -- Перейти к предыдущему/следующему буферу
-vim.cmd[[
-nnoremap <silent>    <A-,> :BufferLineCyclePrev<CR>
-nnoremap <silent>    <A-.> :BufferLineCycleNext<CR>
-]]
+map('n', '<A-,>', '<cmd>BufferLineCyclePrev<CR>', {silent = true})
+map('n', '<A-.>', '<cmd>BufferLineCycleNext<CR>', {silent = true})
 
 -- Перетащить буфер влево/вправо
-vim.cmd[[
-nnoremap <silent>    <A-<> :BufferLineMovePrev<CR>
-nnoremap <silent>    <A->> :BufferLineMoveNext<CR>
-]]
+map('n', '<A-<>', '<cmd>BufferLineMovePrev<CR>', {silent = true})
+map('n', '<A->>', '<cmd>BufferLineMoveNext<CR>', {silent = true})
 
 -- Закрыть буфер
-vim.cmd[[
-nnoremap <silent>    <A-c> :bdelete<CR>
-]]
+map('n', '<A-c>', '<cmd>bdelete<CR>', {silent = true})
 
 -- Выбрать определенный буфер
-vim.cmd[[
-nnoremap <silent> <A-s>    :BufferPick<CR>
-]]
+map('n', '<A-s>', '<cmd>BufferPick<CR>', {silent = true})
 
 -- }}}
 
@@ -93,3 +85,5 @@ nnoremap <silent> <A-s>    :BufferPick<CR>
 map('n', '<leader>[', '<cmd>AerialToggle<cr>', {})
 
 -- }}}
+
+-- vim:ts=2:foldmethod=marker:foldlevel=0:sw=0:sts=2:noet:noci
