@@ -21,11 +21,25 @@
 	-- Кодировка
 	vim.opt.encoding = 'utf-8'
 
+	-- Язык
+	vim.g.langmenu=en
+
 	-- Подчёркиваем линию, на которой находится курсор
 	vim.opt.cursorline = true
 
 	-- Высота статуса
 	vim.opt.cmdheight = 1
+
+	-- Правим тему
+	vim.cmd[[
+	if exists('$TMUX') 
+		if has('nvim')
+			set termguicolors
+		else
+			set term=screen-256color 
+		endif
+	endif
+	]]
 
 ---}}}
 
@@ -36,6 +50,16 @@
 	vim.opt.listchars = [[tab:¦\ ,space:·,precedes:«,extends:»]]
 
 -- }}}
+
+-- Developer Interface : Wildmenu {{{
+
+	-- Включаем wildmenu, это меню автодополнения для команд (:h wildmenu)
+	vim.g.wildmenu = true
+
+	-- Игнорируем скомпилированные файлы
+	vim.g.wildignore = '*.o,*~,*.pyc'
+
+--}}}
 
 -- Developer Experience : Конфигурация табов {{{
 
@@ -115,6 +139,22 @@
 
 	-- Не добавляем новую линию в конце
 	vim.opt.fixendofline = false
+
+	-- История (количество действий, которое запомнит NeoVim)
+	vim.opt.history = 500
+
+	-- Если буфер изменился, то NeoVim прочтёт файл заново
+	vim.opt.autoread = true
+
+	-- Запись с правами суперпользователя
+	vim.cmd[[
+	command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+	]]
+
+	-- Возвращаемся к позиции на которой были, если редактриуем файл дважды
+	vim.cmd([[
+	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+	]])
 
 	-- Говорим Neovim, чтобы он нам помогал завершать фразы (автодополнение)
 	vim.opt.completeopt = { 'menuone', 'noinsert' }

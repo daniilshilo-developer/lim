@@ -168,11 +168,8 @@ return require('packer').startup(function(use)
 
 	-- Табы
 	use {
-		'akinsho/bufferline.nvim',
-		requires = 'kyazdani42/nvim-web-devicons',
-		config = function()
-			require('bufferline').setup()
-		end
+		'romgrk/barbar.nvim',
+		requires = {'kyazdani42/nvim-web-devicons'}
 	}
 
 -- }}}
@@ -193,14 +190,6 @@ return require('packer').startup(function(use)
 -- }}}
 
 -- Прочее {{{
-
-	-- Плавный скролл
-	use {
-		'karb94/neoscroll.nvim',
-		config = function()
-			require('config/neoscroll')
-		end
-	}
 
 	-- Автодополнение скобок
 	use {

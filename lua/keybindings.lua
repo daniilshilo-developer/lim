@@ -65,15 +65,18 @@ map('n', '<leader>v', '<cmd>:NvimTreeToggle<cr>', {})
 -- Bufferline {{{
 
 -- Перейти к предыдущему/следующему буферу
-map('n', '<A-,>', '<cmd>BufferLineCyclePrev<CR>', {silent = true})
-map('n', '<A-.>', '<cmd>BufferLineCycleNext<CR>', {silent = true})
+map('n', '<A-,>', '<cmd>BufferPrevious<CR>', {silent = true})
+map('n', '<A-.>', '<cmd>BufferNext<CR>', {silent = true})
 
 -- Перетащить буфер влево/вправо
-map('n', '<A-<>', '<cmd>BufferLineMovePrev<CR>', {silent = true})
-map('n', '<A->>', '<cmd>BufferLineMoveNext<CR>', {silent = true})
+map('n', '<A-<>', '<cmd>BufferMovePrevious<CR>', {silent = true})
+map('n', '<A->>', '<cmd>BufferMoveNext<CR>', {silent = true})
 
 -- Закрыть буфер
-map('n', '<A-c>', '<cmd>bdelete<CR>', {silent = true})
+map('n', '<A-c>', '<cmd>BufferClose<CR>', {silent = true})
+
+-- Закрепить
+map('n', '<A-p>', '<cmd>BufferPin<CR>', {silent = true})
 
 -- Выбрать определенный буфер
 map('n', '<A-s>', '<cmd>BufferPick<CR>', {silent = true})

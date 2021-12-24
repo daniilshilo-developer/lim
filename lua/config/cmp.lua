@@ -7,6 +7,7 @@ local lspkind = require('lspkind')
 -- Напишем конфигурацию
 cmp.setup({
 
+
 	-- Иконки {{{
 	formatting = {
 		format = lspkind.cmp_format({
@@ -64,5 +65,10 @@ cmp.setup({
 	}),
 	-- }}}
 
+	experimental = {
+
+		-- Включаем гост
+		ghost_text = true
+	},
 })
 -- vim:ts=2:foldmethod=marker:foldlevel=0:sw=0:sts=2:noet:noci
