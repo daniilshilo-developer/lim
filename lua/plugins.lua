@@ -108,20 +108,6 @@ return require('packer').startup(function(use)
 		end
 	}
 
-	-- Дополнение для LSP (диагностика, линт)
-	use {
-		'jose-elias-alvarez/null-ls.nvim',
-		config = function()
-			require("null-ls").setup({
-				sources = {
-					require("null-ls").builtins.formatting.stylua,
-					require("null-ls").builtins.diagnostics.eslint,
-					require("null-ls").builtins.completion.spell,
-				},
-			})
-		end
-	}
-
 	-- Дерево методов
 	use {
 		'stevearc/aerial.nvim',
@@ -191,13 +177,6 @@ return require('packer').startup(function(use)
 	}
 
 -- }}}
-
--- Если мы только что установили Packer
-if packer_bootstrap then
-
-	-- Устанавливаем плагины
-	require('packer').sync()
-end
 end)
 
 -- vim:ts=2:foldmethod=marker:foldlevel=0:sw=0:sts=2:noet:noci
