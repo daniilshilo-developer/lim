@@ -26,7 +26,6 @@ cmp.setup({
 			vim.fn["vsnip#anonymous"](args.body) -- VSnip
 			-- require('luasnip').lsp_expand(args.body) -- LuaSnip
 			-- require('snippy').expand_snippet(args.body) -- Snippy
-			-- vim.fn["UltiSnips#Anon"](args.body) -- Ultisnips
 		end,
 	},
 	-- }}}
@@ -53,11 +52,13 @@ cmp.setup({
 	sources = cmp.config.sources({
 		{ name = 'nvim_lsp' }, -- LSP
 		{ name = 'vsnip' }, -- VSnip
-		-- { name = 'luasnip' }, -- LuaSnip
-		-- { name = 'ultisnips' }, -- Ultisnips
-		-- { name = 'snippy' }, -- Snippy
-
 		{ name = 'cmp-nvim-lua' }, -- Автодополнение Neovim Lua
+		{ name = 'cmp-path' }, -- Автодополнение путей
+		{ name = 'cmp-buffer' }, -- Автодополнение из буферов
+		-- { name = 'luasnip' }, -- LuaSnip
+		-- { name = 'snippy' }, -- Snippy
+		-- { name = 'ultisnips' }, -- Ultisnips
+
 	}, {
 		{ name = 'buffer' },
 	}),

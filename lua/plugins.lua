@@ -97,12 +97,22 @@ return require('packer').startup(function(use)
 		end,
 	}
 
+	-- Хинты
+	use {
+		'ray-x/lsp_signature.nvim',
+		config = function()
+			require('lsp_signature').setup()
+		end,
+	}
+
 	-- Плагин для автодополнения
 	use {
 		'hrsh7th/nvim-cmp',
 		requires = {{
 			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-path'
+			'hrsh7th/cmp-path',
+			'hrsh7th/cmp-buffer',
+			'saadparwaiz1/cmp_luasnip',
 		}},
 		config = function()
 			require('config/cmp')
