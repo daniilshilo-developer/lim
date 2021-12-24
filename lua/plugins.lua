@@ -89,6 +89,14 @@ return require('packer').startup(function(use)
 		requires = {{'hrsh7th/vim-vsnip'}}
 	}
 
+	-- Иконки
+	use {
+		'onsails/lspkind-nvim',
+		config = function()
+			require('config/lspkind')
+		end,
+	}
+
 	-- Плагин для автодополнения
 	use {
 		'hrsh7th/nvim-cmp',
