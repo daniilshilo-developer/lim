@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
 	-- Подсветка синтаксиса
 	use {
 		'nvim-treesitter/nvim-treesitter',
-		--run = ':TSUpdate',
+		run = ':TSUpdate',
 		config = function()
 			require('config/treesitter')
 		end
@@ -61,10 +61,6 @@ return require('packer').startup(function(use)
 	use 'sainnhe/gruvbox-material'
 	use 'tanvirtin/monokai.nvim'
 	use 'navarasu/onedark.nvim'
-	use {
-		'pineapplegiant/spaceduck',
-		branch = 'main' 
-	}
 
 -- }}}
 
@@ -87,18 +83,17 @@ return require('packer').startup(function(use)
 		'neovim/nvim-lspconfig',
 	}
 
-	-- Сниппеты
+	-- Автодополнение
 	use {
-		'hrsh7th/cmp-vsnip',
-		requires = {{'hrsh7th/vim-vsnip'}}
+		'ms-jpq/coq_nvim',
+		run = ':COQdeps',
+		branch = 'coq'
 	}
 
-	-- Иконки
+	-- Сниппеты
 	use {
-		'onsails/lspkind-nvim',
-		config = function()
-			require('config/lspkind')
-		end,
+		'ms-jpq/coq.artifacts',
+		branch = 'artifacts'
 	}
 
 	-- Хинты
@@ -107,20 +102,6 @@ return require('packer').startup(function(use)
 		config = function()
 			require('lsp_signature').setup()
 		end,
-	}
-
-	-- Плагин для автодополнения
-	use {
-		'hrsh7th/nvim-cmp',
-		requires = {{
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-path',
-			'hrsh7th/cmp-buffer',
-			'saadparwaiz1/cmp_luasnip',
-		}},
-		config = function()
-			require('config/cmp')
-		end
 	}
 
 	-- Плагин для установки LS
@@ -149,9 +130,6 @@ return require('packer').startup(function(use)
 			require("trouble").setup {}
 		end
 	}
-
-	-- Улучшеная подсветка
-	use 'folke/lsp-colors.nvim'
 
 -- }}}
 
