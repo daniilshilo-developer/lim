@@ -87,7 +87,10 @@ return require('packer').startup(function(use)
 	use {
 		'ms-jpq/coq_nvim',
 		run = ':COQdeps',
-		branch = 'coq'
+		branch = 'coq',
+		config = function()
+			require('config/coq')
+		end
 	}
 
 	-- Сниппеты

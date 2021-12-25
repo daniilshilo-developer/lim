@@ -92,7 +92,7 @@ map('n', '<leader>[', '<cmd>AerialToggle<cr>', {})
 -- Trouble  {{{
 
 -- Тоггл боттомбара с ошибками в коде
-map('n', '<C-t>', '<cmd>TroubleToggle<cr><C-w>k', {noremap = true})
+map('n', '<leader>]', '<cmd>TroubleToggle<cr><C-w>k', {noremap = true})
 
 -- }}}
 

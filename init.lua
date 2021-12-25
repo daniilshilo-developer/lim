@@ -6,8 +6,6 @@
 	-- Горячие клавиши
 	require('keybindings')
 
-	-- Мои твики
-	require('tweaks')
 
 -- }}}
 
@@ -16,19 +14,22 @@
 	-- Конфигурация цветовой схемы
 	vim.opt.syntax = 'enable'
 	vim.opt.background = 'dark'
-	vim.cmd('colorscheme gruvbox-material')
+	vim.cmd('colorscheme onedark')
 
 	-- Кодировка
 	vim.opt.encoding = 'utf-8'
 
 	-- Язык
-	vim.g.langmenu=en
+	vim.g.langmenu='en'
 
 	-- Подчёркиваем линию, на которой находится курсор
 	vim.opt.cursorline = true
 
 	-- Высота статуса
 	vim.opt.cmdheight = 1
+
+	-- Убираем мод, который есть в lualine
+	vim.opt.showmode = false
 
 	-- Правим тему
 	vim.cmd[[
@@ -60,6 +61,13 @@
 	vim.g.wildignore = '*.o,*~,*.pyc'
 
 --}}}
+
+-- Developer Experience : Твики {{{
+
+	-- Мои твики
+	require('tweaks')
+
+-- }}}
 
 -- Developer Experience : Конфигурация табов {{{
 
@@ -155,9 +163,6 @@
 	vim.cmd([[
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 	]])
-
-	-- Говорим Neovim, чтобы он нам помогал завершать фразы (автодополнение)
-	vim.opt.completeopt = { 'menuone', 'noinsert' }
 
 	-- Отключаем автовыполнение, нужно для Packer
 	vim.g.autocmd = false
