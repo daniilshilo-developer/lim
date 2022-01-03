@@ -14,7 +14,7 @@
 	-- Конфигурация цветовой схемы
 	vim.opt.syntax = 'enable'
 	vim.opt.background = 'dark'
-	vim.cmd('colorscheme tokyonight')
+	vim.cmd('color tokyonight')
 
 	-- Кодировка
 	vim.opt.encoding = 'utf-8'

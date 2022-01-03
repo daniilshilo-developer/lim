@@ -25,13 +25,11 @@ return require('packer').startup(function(use)
 
 	-- Файловый менеджер
 	use {
-		'kyazdani42/nvim-tree.lua',
+		'luukvbaal/nnn.nvim',
 		requires = {
 			'kyazdani42/nvim-web-devicons', -- optional, for file icon
 		},
-		config = function()
-			require'nvim-tree'.setup{}
-		end,
+		config = function() require("nnn").setup() end
 	}
 
 -- }}}
@@ -64,6 +62,7 @@ return require('packer').startup(function(use)
 		'folke/tokyonight.nvim',
 		branch = 'main'
 	}
+	use 'arzg/vim-substrata'
 
 -- }}}
 

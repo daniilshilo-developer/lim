@@ -28,9 +28,6 @@ map('n', '<leader>f', '<cmd>Telescope live_grep<cr>', {})
 -- MRU
 map('n', '<leader>r', '<cmd>Telescope oldfiles<cr>', {})
 
--- Проводник
-map('n', '<leader>e', '<cmd>Telescope file_browser<cr>', {})
-
 -- Посмотреть измененные файлы
 map('n', '<leader>g', '<cmd>Telescope git_status<cr>', {})
 
@@ -55,10 +52,10 @@ map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', {noremap = true})
 
 -- }}}
 
--- NvimTree {{{
+-- Nnn {{{
 
--- Открыть проводник
-map('n', '<leader>v', '<cmd>:NvimTreeToggle<cr>', {})
+-- Проводник
+map('n', '<leader>e', '<cmd>NnnPicker<cr>', {})
 
 -- }}}
 
