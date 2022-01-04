@@ -59,8 +59,11 @@ return require('packer').startup(function(use)
 
 	-- Цветовая схема
 	use 'sainnhe/gruvbox-material'
-	use 'tanvirtin/monokai.nvim'
 	use 'navarasu/onedark.nvim'
+	use {
+		'folke/tokyonight.nvim',
+		branch = 'main'
+	}
 
 -- }}}
 
