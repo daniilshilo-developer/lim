@@ -1,4 +1,4 @@
-vim.g.aerial = {
+require('aerial').setup{
 
   -- Priority list of preferred backends for aerial
   backends = { "lsp", "treesitter", "markdown" },
