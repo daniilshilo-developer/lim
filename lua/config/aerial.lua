@@ -59,17 +59,6 @@ require('aerial').setup{
   -- Set default symbol icons to use Nerd Font icons (see https://www.nerdfonts.com/)
   nerd_font = "auto",
 
-  -- Whether to open aerial automatically when entering a buffer.
-  -- Can also be specified per-filetype as a map (see below)
-  open_automatic = false,
-
-  -- If open_automatic is true, only open aerial if the source buffer is at
-  -- least this long
-  open_automatic_min_lines = 0,
-
-  -- If open_automatic is true, only open aerial if there are at least this many symbols
-  open_automatic_min_symbols = 0,
-
   -- Set to true to only open aerial at the far right/left of the editor
   -- Default behavior opens aerial relative to current window
   placement_editor_edge = false,
@@ -117,18 +106,6 @@ require('aerial').setup{
     -- How long to wait (in ms) after a buffer change before updating
     update_delay = 300,
   },
-}
-
--- open_automatic can be specified as a filetype map. For example, the below
--- configuration will open automatically in all filetypes except python and rust
-vim.g.aerial = {
-  open_automatic = {
-    -- use underscore to specify the default behavior
-    ['_']  = true,
-    typescript = true,
-    python = false,
-    rust   = false,
-  }
 }
 
 -- backends can also be specified as a filetype map.
