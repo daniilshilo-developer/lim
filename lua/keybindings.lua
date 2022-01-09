@@ -16,9 +16,6 @@ map('n', '<leader>f', '<cmd>Telescope live_grep<cr>', {})
 -- MRU
 map('n', '<leader>r', '<cmd>Telescope oldfiles<cr>', {})
 
--- Проводник
-map('n', '<leader>e', '<cmd>Telescope file_browser<cr>', {})
-
 -- Посмотреть измененные файлы
 map('n', '<leader>g', '<cmd>Telescope git_status<cr>', {})
 
