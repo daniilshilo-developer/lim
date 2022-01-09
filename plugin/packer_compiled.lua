@@ -69,32 +69,17 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["aerial.nvim"] = {
-    config = { "\27LJ\1\2-\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\18config/aerial\frequire\0" },
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/aerial.nvim",
-    url = "https://github.com/stevearc/aerial.nvim"
-  },
   ["bufferline.nvim"] = {
     config = { "\27LJ\1\0028\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\15bufferline\frequire\0" },
     loaded = true,
     path = "/home/dsd/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
     url = "https://github.com/akinsho/bufferline.nvim"
   },
-  ["cmp-nvim-lsp"] = {
+  ["coc.nvim"] = {
+    config = { "\27LJ\1\2�\30\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0�\30\n\t\tfunction! s:check_back_space() abort\n\t\tlet col = col('.') - 1\n\t\treturn !col || getline('.')[col - 1]  =~# '\\s'\n\t\tendfunction\n\n\t\t\" Use tab for trigger completion with characters ahead and navigate.\n\t\t\" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by\n\t\t\" other plugin before putting this into your config.\n\t\tinoremap <silent><expr> <TAB>\n\t\t\\ pumvisible() ? \"\\<C-n>\" :\n\t\t\\ <SID>check_back_space() ? \"\\<TAB>\" :\n\t\t\\ coc#refresh()\n\t\tinoremap <expr><S-TAB> pumvisible() ? \"\\<C-p>\" : \"\\<C-h>\"\n\n\t\t\" Use <c-space> to trigger completion.\n\t\tif has('nvim')\n\t\t\tinoremap <silent><expr> <c-space> coc#refresh()\n\t\telse\n\t\t\tinoremap <silent><expr> <c-@> coc#refresh()\n\t\tendif\n\n\t\t\" Make <CR> auto-select the first completion item and notify coc.nvim to\n\t\t\" format on enter, <cr> could be remapped by other vim plugin\n\t\tinoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()\n\t\t\\: \"\\<C-g>u\\<CR>\\<c-r>=coc#on_enter()\\<CR>\"\n\n\t\t\" Use `[g` and `]g` to navigate diagnostics\n\t\t\" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.\n\t\tnmap <silent> [g <Plug>(coc-diagnostic-prev)\n\t\tnmap <silent> ]g <Plug>(coc-diagnostic-next)\n\n\t\t\" GoTo code navigation.\n\t\tnmap <silent> gd <Plug>(coc-definition)\n\t\tnmap <silent> gy <Plug>(coc-type-definition)\n\t\tnmap <silent> gi <Plug>(coc-implementation)\n\t\tnmap <silent> gr <Plug>(coc-references)\n\n\t\t\" Use K to show documentation in preview window.\n\t\tnnoremap <silent> K :call <SID>show_documentation()<CR>\n\n\t\t\tfunction! s:show_documentation()\n\t\t\t\n\t\t\tif (index(['vim','help'], &filetype) >= 0)\n\t\t\t\texecute 'h '.expand('<cword>')\n\t\t\telseif (coc#rpc#ready())\n\t\t\t\tcall CocActionAsync('doHover')\n\t\t\telse\n\t\t\t\texecute '!' . &keywordprg . \" \" . expand('<cword>')\n\n\t\t\tendif\n\n\t\t\tendfunction\n\n\t\t\t\" Highlight the symbol and its references when holding the cursor.\n\t\t\tautocmd CursorHold * silent call CocActionAsync('highlight')\n\n\t\t\t\" Symbol renaming.\n\t\t\tnmap <leader>rn <Plug>(coc-rename)\n\n\t\t\t\" Formatting selected code.\n\t\t\txmap <leader>f  <Plug>(coc-format-selected)\n\t\t\tnmap <leader>f  <Plug>(coc-format-selected)\n\n\t\t\taugroup mygroup\n\t\t\tautocmd!\n\t\t\t\" Setup formatexpr specified filetype(s).\n\t\t\tautocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')\n\t\t\t\" Update signature help on jump placeholder.\n\t\t\tautocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')\n\t\t\taugroup end\n\n\t\t\t\" Applying codeAction to the selected region.\n\t\t\t\" Example: `<leader>aap` for current paragraph\n\t\t\txmap <leader>a  <Plug>(coc-codeaction-selected)\n\t\t\tnmap <leader>a  <Plug>(coc-codeaction-selected)\n\n\t\t\t\" Remap keys for applying codeAction to the current buffer.\n\t\t\tnmap <leader>ac  <Plug>(coc-codeaction)\n\t\t\t\" Apply AutoFix to problem on the current line.\n\t\t\tnmap <leader>qf  <Plug>(coc-fix-current)\n\n\t\t\t\" Run the Code Lens action on the current line.\n\t\t\tnmap <leader>cl  <Plug>(coc-codelens-action)\n\n\t\t\t\" Map function and class text objects\n\t\t\t\" NOTE: Requires 'textDocument.documentSymbol' support from the language server.\n\t\t\txmap if <Plug>(coc-funcobj-i)\n\t\t\tomap if <Plug>(coc-funcobj-i)\n\t\t\txmap af <Plug>(coc-funcobj-a)\n\t\t\tomap af <Plug>(coc-funcobj-a)\n\t\t\txmap ic <Plug>(coc-classobj-i)\n\t\t\tomap ic <Plug>(coc-classobj-i)\n\t\t\txmap ac <Plug>(coc-classobj-a)\n\t\t\tomap ac <Plug>(coc-classobj-a)\n\n\t\t\t\" Add `:Format` command to format current buffer.\n\t\t\tcommand! -nargs=0 Format :call CocAction('format')\n\n\t\t\t\" Add `:Fold` command to fold current buffer.\n\t\t\tcommand! -nargs=? Fold :call     CocAction('fold', <f-args>)\n\n\t\t\t\" Add `:OR` command for organize imports of the current buffer.\n\t\t\tcommand! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')\n\n\t\t\t\" Search workspace symbols.\n\t\t\tnnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>\n\n\t\t\t\" Show all diagnostics.\n\t\t\tnnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>\n\t\t\t\bcmd\bvim\0" },
     loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
-    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
-  },
-  ["cmp-path"] = {
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/cmp-path",
-    url = "https://github.com/hrsh7th/cmp-path"
-  },
-  ["cmp-vsnip"] = {
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
+    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/coc.nvim",
+    url = "https://github.com/neoclide/coc.nvim"
   },
   ["gruvbox-material"] = {
     loaded = true,
@@ -106,17 +91,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dsd/.local/share/nvim/site/pack/packer/start/kommentary",
     url = "https://github.com/b3nj5m1n/kommentary"
-  },
-  ["lsp-colors.nvim"] = {
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/lsp-colors.nvim",
-    url = "https://github.com/folke/lsp-colors.nvim"
-  },
-  ["lspkind-nvim"] = {
-    config = { "\27LJ\1\2�\3\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\15symbol_map\1\0\25\tText\b\rFunction\b\rOperator\b\nColor\b\nClass\bﴯ\vModule\b\rConstant\b\rProperty\bﰠ\vMethod\b\15EnumMember\b\tUnit\b塞\14Interface\b\vStruct\bפּ\rVariable\b\fSnippet\b\vFolder\b\nEvent\b\nField\bﰠ\18TypeParameter\5\tFile\b\nValue\b\16Constructor\b\tEnum\b\fKeyword\b\14Reference\b\1\0\1\14with_text\1\tinit\flspkind\frequire\0" },
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
-    url = "https://github.com/onsails/lspkind-nvim"
   },
   ["lualine.nvim"] = {
     config = { "\27LJ\1\2.\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\19config/lualine\frequire\0" },
@@ -140,23 +114,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/dsd/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
     url = "https://github.com/windwp/nvim-autopairs"
-  },
-  ["nvim-cmp"] = {
-    config = { '\27LJ\1\2;\0\1\3\0\4\0\0064\1\0\0007\1\1\0017\1\2\0017\2\3\0>\1\2\1G\0\1\0\tbody\20vsnip#anonymous\afn\bvim�\4\1\0\b\0$\0?4\0\0\0%\1\1\0>\0\2\0024\1\0\0%\2\2\0>\1\2\0027\2\3\0003\3\b\0003\4\6\0007\5\4\0013\6\5\0>\5\2\2:\5\a\4:\4\t\0033\4\v\0001\5\n\0:\5\f\4:\4\r\0033\4\17\0007\5\14\0007\6\14\0007\6\15\6>\6\1\0023\a\16\0>\5\3\2:\5\18\0047\5\19\0007\5\20\5:\5\21\0047\5\14\0007\5\22\0053\6\23\0>\5\2\2:\5\24\0047\5\14\0003\6\26\0007\a\14\0007\a\25\a>\a\1\2:\a\27\0067\a\14\0007\a\28\a>\a\1\2:\a\29\6>\5\2\2:\5\30\4:\4\14\0037\4\19\0007\4\31\0042\5\4\0003\6 \0;\6\1\0053\6!\0;\6\2\0053\6"\0;\6\3\0052\6\3\0003\a#\0;\a\1\6>\4\3\2:\4\31\3>\2\2\1G\0\1\0\1\0\1\tname\vbuffer\1\0\1\tname\17cmp-nvim-lua\1\0\1\tname\nvsnip\1\0\1\tname\rnvim_lsp\fsources\n<C-e>\6c\nclose\6i\1\0\0\nabort\n<C-y>\1\0\1\vselect\2\fconfirm\t<CR>\fdisable\vconfig\14<C-Space>\1\0\0\1\3\0\0\6i\6c\rcomplete\fmapping\fsnippet\vexpand\1\0\0\0\15formatting\1\0\0\vformat\1\0\0\1\0\2\rmaxwidth\0032\14with_text\1\15cmp_format\nsetup\flspkind\bcmp\frequire\0' },
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/nvim-cmp",
-    url = "https://github.com/hrsh7th/nvim-cmp"
-  },
-  ["nvim-lsp-installer"] = {
-    config = { "\27LJ\1\2%\0\1\5\0\1\0\0062\1\0\0\16\3\0\0007\2\0\0\16\4\1\0>\2\3\1G\0\1\0\nsetupO\1\0\3\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\1\2\0001\2\3\0>\1\2\1G\0\1\0\0\20on_server_ready\23nvim-lsp-installer\frequire\0" },
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
-    url = "https://github.com/williamboman/nvim-lsp-installer"
-  },
-  ["nvim-lspconfig"] = {
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
-    url = "https://github.com/neovim/nvim-lspconfig"
   },
   ["nvim-tree.lua"] = {
     config = { "\27LJ\1\2�\1\0\0\5\0\t\0\r4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\a\0003\2\3\0003\3\4\0002\4\0\0:\4\5\3:\3\6\2:\2\b\1>\0\2\1G\0\1\0\tview\1\0\0\rmappings\tlist\1\0\1\16custom_only\1\1\0\b\tside\nright\21hide_root_folder\1\16auto_resize\2\vheight\3\30\19relativenumber\1\vnumber\1\15signcolumn\byes\nwidth\0032\nsetup\14nvim-tree\frequire\0" },
@@ -202,27 +159,22 @@ _G.packer_plugins = {
     only_cond = false,
     path = "/home/dsd/.local/share/nvim/site/pack/packer/opt/vgit.nvim",
     url = "https://github.com/tanvirtin/vgit.nvim"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/dsd/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: aerial.nvim
-time([[Config for aerial.nvim]], true)
-try_loadstring("\27LJ\1\2-\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\18config/aerial\frequire\0", "config", "aerial.nvim")
-time([[Config for aerial.nvim]], false)
+-- Config for: kommentary
+time([[Config for kommentary]], true)
+try_loadstring("\27LJ\1\2�\1\0\0\4\0\a\0\n4\0\0\0%\1\1\0>\0\2\0027\0\2\0%\1\3\0003\2\4\0003\3\5\0:\3\6\2>\0\3\1G\0\1\0\31multi_line_comment_strings\1\3\0\0\a/*\a*/\1\0\1\31single_line_comment_string\a//\15typescript\23configure_language\22kommentary.config\frequire\0", "config", "kommentary")
+time([[Config for kommentary]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 try_loadstring("\27LJ\1\0021\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\22config/treesitter\frequire\0", "config", "nvim-treesitter")
 time([[Config for nvim-treesitter]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-try_loadstring('\27LJ\1\2;\0\1\3\0\4\0\0064\1\0\0007\1\1\0017\1\2\0017\2\3\0>\1\2\1G\0\1\0\tbody\20vsnip#anonymous\afn\bvim�\4\1\0\b\0$\0?4\0\0\0%\1\1\0>\0\2\0024\1\0\0%\2\2\0>\1\2\0027\2\3\0003\3\b\0003\4\6\0007\5\4\0013\6\5\0>\5\2\2:\5\a\4:\4\t\0033\4\v\0001\5\n\0:\5\f\4:\4\r\0033\4\17\0007\5\14\0007\6\14\0007\6\15\6>\6\1\0023\a\16\0>\5\3\2:\5\18\0047\5\19\0007\5\20\5:\5\21\0047\5\14\0007\5\22\0053\6\23\0>\5\2\2:\5\24\0047\5\14\0003\6\26\0007\a\14\0007\a\25\a>\a\1\2:\a\27\0067\a\14\0007\a\28\a>\a\1\2:\a\29\6>\5\2\2:\5\30\4:\4\14\0037\4\19\0007\4\31\0042\5\4\0003\6 \0;\6\1\0053\6!\0;\6\2\0053\6"\0;\6\3\0052\6\3\0003\a#\0;\a\1\6>\4\3\2:\4\31\3>\2\2\1G\0\1\0\1\0\1\tname\vbuffer\1\0\1\tname\17cmp-nvim-lua\1\0\1\tname\nvsnip\1\0\1\tname\rnvim_lsp\fsources\n<C-e>\6c\nclose\6i\1\0\0\nabort\n<C-y>\1\0\1\vselect\2\fconfirm\t<CR>\fdisable\vconfig\14<C-Space>\1\0\0\1\3\0\0\6i\6c\rcomplete\fmapping\fsnippet\vexpand\1\0\0\0\15formatting\1\0\0\vformat\1\0\0\1\0\2\rmaxwidth\0032\14with_text\1\15cmp_format\nsetup\flspkind\bcmp\frequire\0', "config", "nvim-cmp")
-time([[Config for nvim-cmp]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\1\2.\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\19config/lualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
 -- Config for: nvim-tree.lua
 time([[Config for nvim-tree.lua]], true)
 try_loadstring("\27LJ\1\2�\1\0\0\5\0\t\0\r4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\a\0003\2\3\0003\3\4\0002\4\0\0:\4\5\3:\3\6\2:\2\b\1>\0\2\1G\0\1\0\tview\1\0\0\rmappings\tlist\1\0\1\16custom_only\1\1\0\b\tside\nright\21hide_root_folder\1\16auto_resize\2\vheight\3\30\19relativenumber\1\vnumber\1\15signcolumn\byes\nwidth\0032\nsetup\14nvim-tree\frequire\0", "config", "nvim-tree.lua")
@@ -231,18 +183,6 @@ time([[Config for nvim-tree.lua]], false)
 time([[Config for neoscroll.nvim]], true)
 try_loadstring("\27LJ\1\0020\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\21config/neoscroll\frequire\0", "config", "neoscroll.nvim")
 time([[Config for neoscroll.nvim]], false)
--- Config for: lspkind-nvim
-time([[Config for lspkind-nvim]], true)
-try_loadstring("\27LJ\1\2�\3\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\15symbol_map\1\0\25\tText\b\rFunction\b\rOperator\b\nColor\b\nClass\bﴯ\vModule\b\rConstant\b\rProperty\bﰠ\vMethod\b\15EnumMember\b\tUnit\b塞\14Interface\b\vStruct\bפּ\rVariable\b\fSnippet\b\vFolder\b\nEvent\b\nField\bﰠ\18TypeParameter\5\tFile\b\nValue\b\16Constructor\b\tEnum\b\fKeyword\b\14Reference\b\1\0\1\14with_text\1\tinit\flspkind\frequire\0", "config", "lspkind-nvim")
-time([[Config for lspkind-nvim]], false)
--- Config for: lualine.nvim
-time([[Config for lualine.nvim]], true)
-try_loadstring("\27LJ\1\2.\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\19config/lualine\frequire\0", "config", "lualine.nvim")
-time([[Config for lualine.nvim]], false)
--- Config for: nvim-lsp-installer
-time([[Config for nvim-lsp-installer]], true)
-try_loadstring("\27LJ\1\2%\0\1\5\0\1\0\0062\1\0\0\16\3\0\0007\2\0\0\16\4\1\0>\2\3\1G\0\1\0\nsetupO\1\0\3\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\1\2\0001\2\3\0>\1\2\1G\0\1\0\0\20on_server_ready\23nvim-lsp-installer\frequire\0", "config", "nvim-lsp-installer")
-time([[Config for nvim-lsp-installer]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\1\0028\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
@@ -251,10 +191,10 @@ time([[Config for bufferline.nvim]], false)
 time([[Config for nvim-autopairs]], true)
 try_loadstring("\27LJ\1\0020\0\0\2\0\2\0\0044\0\0\0%\1\1\0>\0\2\1G\0\1\0\21config/autopairs\frequire\0", "config", "nvim-autopairs")
 time([[Config for nvim-autopairs]], false)
--- Config for: kommentary
-time([[Config for kommentary]], true)
-try_loadstring("\27LJ\1\2�\1\0\0\4\0\a\0\n4\0\0\0%\1\1\0>\0\2\0027\0\2\0%\1\3\0003\2\4\0003\3\5\0:\3\6\2>\0\3\1G\0\1\0\31multi_line_comment_strings\1\3\0\0\a/*\a*/\1\0\1\31single_line_comment_string\a//\15typescript\23configure_language\22kommentary.config\frequire\0", "config", "kommentary")
-time([[Config for kommentary]], false)
+-- Config for: coc.nvim
+time([[Config for coc.nvim]], true)
+try_loadstring("\27LJ\1\2�\30\0\0\2\0\3\0\0054\0\0\0007\0\1\0%\1\2\0>\0\2\1G\0\1\0�\30\n\t\tfunction! s:check_back_space() abort\n\t\tlet col = col('.') - 1\n\t\treturn !col || getline('.')[col - 1]  =~# '\\s'\n\t\tendfunction\n\n\t\t\" Use tab for trigger completion with characters ahead and navigate.\n\t\t\" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by\n\t\t\" other plugin before putting this into your config.\n\t\tinoremap <silent><expr> <TAB>\n\t\t\\ pumvisible() ? \"\\<C-n>\" :\n\t\t\\ <SID>check_back_space() ? \"\\<TAB>\" :\n\t\t\\ coc#refresh()\n\t\tinoremap <expr><S-TAB> pumvisible() ? \"\\<C-p>\" : \"\\<C-h>\"\n\n\t\t\" Use <c-space> to trigger completion.\n\t\tif has('nvim')\n\t\t\tinoremap <silent><expr> <c-space> coc#refresh()\n\t\telse\n\t\t\tinoremap <silent><expr> <c-@> coc#refresh()\n\t\tendif\n\n\t\t\" Make <CR> auto-select the first completion item and notify coc.nvim to\n\t\t\" format on enter, <cr> could be remapped by other vim plugin\n\t\tinoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()\n\t\t\\: \"\\<C-g>u\\<CR>\\<c-r>=coc#on_enter()\\<CR>\"\n\n\t\t\" Use `[g` and `]g` to navigate diagnostics\n\t\t\" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.\n\t\tnmap <silent> [g <Plug>(coc-diagnostic-prev)\n\t\tnmap <silent> ]g <Plug>(coc-diagnostic-next)\n\n\t\t\" GoTo code navigation.\n\t\tnmap <silent> gd <Plug>(coc-definition)\n\t\tnmap <silent> gy <Plug>(coc-type-definition)\n\t\tnmap <silent> gi <Plug>(coc-implementation)\n\t\tnmap <silent> gr <Plug>(coc-references)\n\n\t\t\" Use K to show documentation in preview window.\n\t\tnnoremap <silent> K :call <SID>show_documentation()<CR>\n\n\t\t\tfunction! s:show_documentation()\n\t\t\t\n\t\t\tif (index(['vim','help'], &filetype) >= 0)\n\t\t\t\texecute 'h '.expand('<cword>')\n\t\t\telseif (coc#rpc#ready())\n\t\t\t\tcall CocActionAsync('doHover')\n\t\t\telse\n\t\t\t\texecute '!' . &keywordprg . \" \" . expand('<cword>')\n\n\t\t\tendif\n\n\t\t\tendfunction\n\n\t\t\t\" Highlight the symbol and its references when holding the cursor.\n\t\t\tautocmd CursorHold * silent call CocActionAsync('highlight')\n\n\t\t\t\" Symbol renaming.\n\t\t\tnmap <leader>rn <Plug>(coc-rename)\n\n\t\t\t\" Formatting selected code.\n\t\t\txmap <leader>f  <Plug>(coc-format-selected)\n\t\t\tnmap <leader>f  <Plug>(coc-format-selected)\n\n\t\t\taugroup mygroup\n\t\t\tautocmd!\n\t\t\t\" Setup formatexpr specified filetype(s).\n\t\t\tautocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')\n\t\t\t\" Update signature help on jump placeholder.\n\t\t\tautocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')\n\t\t\taugroup end\n\n\t\t\t\" Applying codeAction to the selected region.\n\t\t\t\" Example: `<leader>aap` for current paragraph\n\t\t\txmap <leader>a  <Plug>(coc-codeaction-selected)\n\t\t\tnmap <leader>a  <Plug>(coc-codeaction-selected)\n\n\t\t\t\" Remap keys for applying codeAction to the current buffer.\n\t\t\tnmap <leader>ac  <Plug>(coc-codeaction)\n\t\t\t\" Apply AutoFix to problem on the current line.\n\t\t\tnmap <leader>qf  <Plug>(coc-fix-current)\n\n\t\t\t\" Run the Code Lens action on the current line.\n\t\t\tnmap <leader>cl  <Plug>(coc-codelens-action)\n\n\t\t\t\" Map function and class text objects\n\t\t\t\" NOTE: Requires 'textDocument.documentSymbol' support from the language server.\n\t\t\txmap if <Plug>(coc-funcobj-i)\n\t\t\tomap if <Plug>(coc-funcobj-i)\n\t\t\txmap af <Plug>(coc-funcobj-a)\n\t\t\tomap af <Plug>(coc-funcobj-a)\n\t\t\txmap ic <Plug>(coc-classobj-i)\n\t\t\tomap ic <Plug>(coc-classobj-i)\n\t\t\txmap ac <Plug>(coc-classobj-a)\n\t\t\tomap ac <Plug>(coc-classobj-a)\n\n\t\t\t\" Add `:Format` command to format current buffer.\n\t\t\tcommand! -nargs=0 Format :call CocAction('format')\n\n\t\t\t\" Add `:Fold` command to fold current buffer.\n\t\t\tcommand! -nargs=? Fold :call     CocAction('fold', <f-args>)\n\n\t\t\t\" Add `:OR` command for organize imports of the current buffer.\n\t\t\tcommand! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')\n\n\t\t\t\" Search workspace symbols.\n\t\t\tnnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>\n\n\t\t\t\" Show all diagnostics.\n\t\t\tnnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>\n\t\t\t\bcmd\bvim\0", "config", "coc.nvim")
+time([[Config for coc.nvim]], false)
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Event lazy-loads

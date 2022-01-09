@@ -96,164 +96,124 @@ return require('packer').startup(function(use)
 
 -- LSP {{{
 
-	-- Конфигурация для LSP
-	use {
-		'neovim/nvim-lspconfig',
-	}
+use {
+	'neoclide/coc.nvim',
+	branch = 'release',
+	config = function()
+		vim.cmd[[
 
-	-- Сниппеты
-	use {
-		'hrsh7th/cmp-vsnip',
-		requires = {{'hrsh7th/vim-vsnip'}}
-	}
+		function! s:check_back_space() abort
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~# '\s'
+		endfunction
 
-	-- Иконки
-	use {
-		'onsails/lspkind-nvim',
-		config = function()
+		" Use tab for trigger completion with characters ahead and navigate.
+		" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+		" other plugin before putting this into your config.
+		inoremap <silent><expr> <TAB>
+		\ pumvisible() ? "\<C-n>" :
+		\ <SID>check_back_space() ? "\<TAB>" :
+		\ coc#refresh()
+		inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-			-- Поддержка иконок в nvim-cmp
-			require('lspkind').init({
+		" Use <c-space> to trigger completion.
+		if has('nvim')
+			inoremap <silent><expr> <c-space> coc#refresh()
+		else
+			inoremap <silent><expr> <c-@> coc#refresh()
+		endif
 
-				-- Убираем текст рядом с иконками
-				with_text = false,
+		" Make <CR> auto-select the first completion item and notify coc.nvim to
+		" format on enter, <cr> could be remapped by other vim plugin
+		inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+		\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-				-- Карта для иконок
-				symbol_map = {
-					Text = "",
-					Method = "",
-					Function = "",
-					Constructor = "",
-					Field = "ﰠ",
-					Variable = "",
-					Class = "ﴯ",
-					Interface = "",
-					Module = "",
-					Property = "ﰠ",
-					Unit = "塞",
-					Value = "",
-					Enum = "",
-					Keyword = "",
-					Snippet = "",
-					Color = "",
-					File = "",
-					Reference = "",
-					Folder = "",
-					EnumMember = "",
-					Constant = "",
-					Struct = "פּ",
-					Event = "",
-					Operator = "",
-					TypeParameter = ""
-				},
-			})
-		end,
-	}
+		" Use `[g` and `]g` to navigate diagnostics
+		" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+		nmap <silent> [g <Plug>(coc-diagnostic-prev)
+		nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-	-- Плагин для автодополнения
-	use {
-		'hrsh7th/nvim-cmp',
-		requires = {{
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-path'
-		}},
-		config = function()
-			-- Инициализируем локальную переменную с модулем cmp
-			local cmp = require('cmp')
+		" GoTo code navigation.
+		nmap <silent> gd <Plug>(coc-definition)
+		nmap <silent> gy <Plug>(coc-type-definition)
+		nmap <silent> gi <Plug>(coc-implementation)
+		nmap <silent> gr <Plug>(coc-references)
 
-			-- Инициализируем локальную переменную для модуля с иконками
-			local lspkind = require('lspkind')
+		" Use K to show documentation in preview window.
+		nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-			-- Напишем конфигурацию
-			cmp.setup({
+			function! s:show_documentation()
+			
+			if (index(['vim','help'], &filetype) >= 0)
+				execute 'h '.expand('<cword>')
+			elseif (coc#rpc#ready())
+				call CocActionAsync('doHover')
+			else
+				execute '!' . &keywordprg . " " . expand('<cword>')
 
-				-- Иконки {{{
-				formatting = {
-					format = lspkind.cmp_format({
-						with_text = false, -- Не показываем текст
-						maxwidth = 50, -- Не показываем больше, чем 50 символов в попапе
-					}),
-				},
+			endif
 
-				-- }}}
+			endfunction
 
-				-- Сниппеты {{{
-				snippet = {
+			" Highlight the symbol and its references when holding the cursor.
+			autocmd CursorHold * silent call CocActionAsync('highlight')
 
-					-- С помощью какого механизма сниппетов будет автодополняться код
-					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body) -- VSnip
-						-- require('luasnip').lsp_expand(args.body) -- LuaSnip
-						-- require('snippy').expand_snippet(args.body) -- Snippy
-						-- vim.fn["UltiSnips#Anon"](args.body) -- Ultisnips
-					end,
-				},
-				-- }}}
+			" Symbol renaming.
+			nmap <leader>rn <Plug>(coc-rename)
 
-				-- Хоткеи {{{
-				-- Клавиши, которые будут взаимодействовать в nvim-cmp
-				mapping = {
+			" Formatting selected code.
+			xmap <leader>f  <Plug>(coc-format-selected)
+			nmap <leader>f  <Plug>(coc-format-selected)
 
-					-- Вызов меню автодополнения
-					['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-					['<CR>'] = cmp.config.disable, -- Я не люблю, когда вещи автодополняются на <Enter>
-					['<C-y>'] = cmp.mapping.confirm({ select = true }), -- А вот на <C-y> вполне ок
+			augroup mygroup
+			autocmd!
+			" Setup formatexpr specified filetype(s).
+			autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+			" Update signature help on jump placeholder.
+			autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+			augroup end
 
-					-- Используем <C-e> для того чтобы прервать автодополнение
-					['<C-e>'] = cmp.mapping({
-						i = cmp.mapping.abort(), -- Прерываем автодополнение
-						c = cmp.mapping.close(), -- Закрываем автодополнение
-					}),
-				},
-				-- }}}
+			" Applying codeAction to the selected region.
+			" Example: `<leader>aap` for current paragraph
+			xmap <leader>a  <Plug>(coc-codeaction-selected)
+			nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-				-- Сорняки для автокомплита {{{
-				-- Исходники, из которых будут идти варианты для автодополнения
-				sources = cmp.config.sources({
-					{ name = 'nvim_lsp' }, -- LSP
-					{ name = 'vsnip' }, -- VSnip
-					-- { name = 'luasnip' }, -- LuaSnip
-					-- { name = 'ultisnips' }, -- Ultisnips
-					-- { name = 'snippy' }, -- Snippy
+			" Remap keys for applying codeAction to the current buffer.
+			nmap <leader>ac  <Plug>(coc-codeaction)
+			" Apply AutoFix to problem on the current line.
+			nmap <leader>qf  <Plug>(coc-fix-current)
 
-					{ name = 'cmp-nvim-lua' }, -- Автодополнение Neovim Lua
-				}, {
-					{ name = 'buffer' },
-				}),
-				-- }}}
+			" Run the Code Lens action on the current line.
+			nmap <leader>cl  <Plug>(coc-codelens-action)
 
-			})
+			" Map function and class text objects
+			" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+			xmap if <Plug>(coc-funcobj-i)
+			omap if <Plug>(coc-funcobj-i)
+			xmap af <Plug>(coc-funcobj-a)
+			omap af <Plug>(coc-funcobj-a)
+			xmap ic <Plug>(coc-classobj-i)
+			omap ic <Plug>(coc-classobj-i)
+			xmap ac <Plug>(coc-classobj-a)
+			omap ac <Plug>(coc-classobj-a)
+
+			" Add `:Format` command to format current buffer.
+			command! -nargs=0 Format :call CocAction('format')
+
+			" Add `:Fold` command to fold current buffer.
+			command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+			" Add `:OR` command for organize imports of the current buffer.
+			command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
+
+			" Search workspace symbols.
+			nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+
+			" Show all diagnostics.
+			nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+			]]
 		end
 	}
-
-	-- Плагин для установки LS
-	use {
-		'williamboman/nvim-lsp-installer',
-
-		-- Конфигурация для того, чтобы устанавливать сервера
-		config = function()
-			local lsp_installer = require("nvim-lsp-installer")
-
-			-- Обработчик при включении сервера
-			lsp_installer.on_server_ready(function(server)
-				local opts = {}
-
-				-- Подключаем конфигурацию к включившемуся серверу
-				server:setup(opts)
-			end)
-		end
-	}
-
-	-- Дерево методов
-	use {
-		'stevearc/aerial.nvim',
-		config = function()
-			require('config/aerial')
-		end
-	}
-
-	-- Улучшеная подсветка
-	use 'folke/lsp-colors.nvim'
 
 -- }}}
 
